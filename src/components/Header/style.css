@@ -12,13 +12,18 @@
 }
 
 .links a{
-    color: var(--purple-grey);
+    color: #8ea6bb;
     text-decoration: none;
+    font-weight: 500;
 }
 
 .links a:hover{
     color: var(--white);
     transition: all 0.5s;
+}
+
+.active{
+    color: var(--white) !important;
 }
 
 .gradient{

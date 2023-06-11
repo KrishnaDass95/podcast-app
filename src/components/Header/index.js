@@ -6,6 +6,7 @@ const Header = () => {
     return(
         <>
         <div className="navbar">
+            <div className="gradient"></div>
             <div className="links">
                 <Link to="/">Signup</Link>
                 <Link to="/podcasts">Podcasts</Link>

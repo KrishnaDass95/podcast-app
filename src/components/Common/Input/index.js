@@ -1,4 +1,4 @@
-
+import "./style.css";
 
 const Input = ({type, state, setState, placeholder, required}) => {
 

@@ -11,7 +11,7 @@ const LoginForm = () => {
     }
 
     return(
-        <div>
+        <div className="input-wrapper">
             <Input 
             type="text"
             placeholder="Email"

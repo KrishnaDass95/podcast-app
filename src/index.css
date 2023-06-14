@@ -22,3 +22,22 @@ input {
   font-family: 'Inter', sans-serif;
 }
 
+.input-wrapper{
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  gap: 1rem;
+  width: 70%;
+}
+
+h1{
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.signup-flag-p{
+  text-align: center;
+  cursor: pointer;
+}

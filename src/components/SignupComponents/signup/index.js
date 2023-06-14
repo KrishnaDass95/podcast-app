@@ -1,5 +1,6 @@
 import Input from "../../Common/Input"
 import { useState } from "react";
+import Button from "../../Common/Button";
 
 const SignupComponent = () => {
     const [fullName, setFullName] = useState("");
@@ -7,13 +8,17 @@ const SignupComponent = () => {
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
 
+    function handleSignup(){
+        console.log("Sign up");
+    }
+
     return(
         <div className="input-wrapper">
             <Input 
             type="text"
             value={fullName}
             placeholder="Full Name"
-            required="true"
+            required={true}
             setState={setFullName}
             />
 
@@ -21,7 +26,7 @@ const SignupComponent = () => {
             type="text"
             value={email}
             placeholder="Email"
-            required="true"
+            required={true}
             setState={setEmail}
             />
 
@@ -29,7 +34,7 @@ const SignupComponent = () => {
             type="password"
             value={password}
             placeholder="Password"
-            required="true"
+            required={true}
             setState={setPassword}
             />
 
@@ -37,11 +42,16 @@ const SignupComponent = () => {
             type="password"
             value={confirmPassword}
             placeholder="Confirm Password"
-            required="true"
+            required={true}
             setState={setConfirmPassword}
             />
 
-            
+            <Button 
+            text="signup"
+            onClick={handleSignup}
+            />
+
+
             
         </div>
     )

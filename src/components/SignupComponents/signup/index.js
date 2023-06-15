@@ -3,12 +3,15 @@ import { useState } from "react";
 import Button from "../../Common/Button";
 import { auth, db, storage } from "../../../firebase.js";
 import { createUserWithEmailAndPassword } from "firebase/auth";
+import { setDoc,doc } from "firebase/firestore";
+import { useDispatch } from "react-redux";
 
 const SignupComponent = () => {
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const dispatch = useDispatch();
 
   async function handleSignup() {
     console.log("Sign up...");
@@ -23,6 +26,14 @@ const SignupComponent = () => {
         // getting user object from firebase created user
         const user = userCredential.user;
         console.log("user signed up from firebase", user);
+
+        // save the user details to firebase db and create user doc
+        await setDoc(doc(db, "users", user.uid), {
+            name: fullName,
+            email: user.email,
+            uid: user.uid
+        });
+
       } catch (e) {
         console.log("error ->", e);
       }

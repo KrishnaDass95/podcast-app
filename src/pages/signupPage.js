@@ -1,12 +1,14 @@
 import SignupComponent from "../components/SignupComponents/signup";
 import LoginForm from "../components/SignupComponents/login";
 import { useState } from "react";
+import Header from "../components/Header";
 
 const SignupPage = () => {
   const [flag, setFlag] = useState(true);
 
   return (
     <div>
+      <Header /> 
       {flag ? <h1>Signup</h1> : <h1>Login</h1>}
       {flag ? <SignupComponent /> : <LoginForm />}
       {flag ? (

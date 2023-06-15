@@ -3,8 +3,10 @@ import { useState } from "react";
 import Button from "../../Common/Button";
 import { auth, db, storage } from "../../../firebase.js";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { setDoc,doc } from "firebase/firestore";
+import { setDoc, doc } from "firebase/firestore";
 import { useDispatch } from "react-redux";
+import { setUser } from "../../../slices/userSlice";
+import { useNavigate } from "react-router-dom";
 
 const SignupComponent = () => {
   const [fullName, setFullName] = useState("");
@@ -12,6 +14,7 @@ const SignupComponent = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   async function handleSignup() {
     console.log("Sign up...");
@@ -29,10 +32,20 @@ const SignupComponent = () => {
 
         // save the user details to firebase db and create user doc
         await setDoc(doc(db, "users", user.uid), {
+          name: fullName,
+          email: user.email,
+          uid: user.uid,
+        });
+
+        dispatch(
+          setUser({
             name: fullName,
             email: user.email,
-            uid: user.uid
-        });
+            uid: user.uid,
+          })
+        );
+
+        navigate("/profile");
 
       } catch (e) {
         console.log("error ->", e);

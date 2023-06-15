@@ -1,7 +1,10 @@
 import "./style.css";
 
-const Button = ({ text, onClick }) => {
-  return <div className="custom-btn"
-  onClick={onClick}>{text}</div>;
+const Button = ({ text, onClick, disabled }) => {
+  return (
+    <div className="custom-btn" onClick={onClick} disabled={disabled}>
+      {text}
+    </div>
+  );
 };
 export default Button;

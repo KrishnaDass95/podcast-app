@@ -7,18 +7,22 @@ import { setDoc, doc } from "firebase/firestore";
 import { useDispatch } from "react-redux";
 import { setUser } from "../../../slices/userSlice";
 import { useNavigate } from "react-router-dom";
+import { toast } from 'react-toastify';
+
 
 const SignupComponent = () => {
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   async function handleSignup() {
     console.log("Sign up...");
-    if (password === confirmPassword) {
+    setLoading(true);
+    if (password === confirmPassword && password.length >= 6 && email && password) {
       try {
         // create user in firebase, this is authentication
         const userCredential = await createUserWithEmailAndPassword(
@@ -45,11 +49,31 @@ const SignupComponent = () => {
           })
         );
 
+        toast.success('Signup success!')
+        setLoading(false);
+
         navigate("/profile");
 
       } catch (e) {
         console.log("error ->", e);
+        toast.error(e.message);
+        setLoading(false);
       }
+    }
+    else{
+      if(password != confirmPassword){
+        toast.error('Password and confirm password do not match');
+        setLoading(false);
+      }
+      else if(password.length < 6){
+        toast.error('Password length must be more than 6 characters');
+        setLoading(false);
+      }
+      else{
+        toast.error('please enter all the fields, some are missing');
+        setLoading(false);
+      }
+
     }
   }
 
@@ -87,7 +111,8 @@ const SignupComponent = () => {
         setState={setConfirmPassword}
       />
 
-      <Button text="signup" onClick={handleSignup} />
+      <Button text={loading ? 'Loading' : 'Signup'} onClick={handleSignup} 
+      disabled={loading}/>
     </div>
   );
 };

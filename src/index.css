@@ -28,7 +28,7 @@ input {
   flex-direction: column;
   justify-content: center;
   text-align: center;
-  gap: 1rem;
+  gap: 2rem;
   width: 70%;
 }
 

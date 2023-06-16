@@ -12,6 +12,7 @@ import { db, auth } from './firebase';
 import { setUser } from './slices/userSlice';
 import { doc } from "firebase/firestore";
 import PrivateRoutes from './components/Common/PrivateRoutes';
+import CreateAPodcastPage from './pages/podcastPage';
 
 const App = () => {
 
@@ -65,6 +66,7 @@ const App = () => {
         <Route path="/" element={<SignupPage />}></Route>
         <Route element={<PrivateRoutes />}>
         <Route path="/profile" element={<ProfilePage />}></Route>
+        <Route path="/create-a-podcast" element={<CreateAPodcastPage />}></Route>
         </Route>
       </Routes>
     </div>

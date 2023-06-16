@@ -18,7 +18,7 @@ const Header = () => {
                 <Link to="/podcasts"
                 className={currentPath == '/podcasts' ? 'active' : ''}
                 >Podcasts</Link>
-                <Link to="/start-a-podcast"
+                <Link to="/create-a-podcast"
                 className={currentPath == '/start-a-podcast' ? 'active' : ''}
                 >Start A Podcast</Link>
                 <Link to="/profile"

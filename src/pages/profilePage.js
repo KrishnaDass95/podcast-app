@@ -3,6 +3,11 @@ import Header from "../components/Header"
 
 const ProfilePage = () => {
     const user = useSelector((state) => state.user.user);
+    if(!user){
+        return(
+            <div>Loading...</div>
+        )
+    }
     return(
         <div>
             <Header />

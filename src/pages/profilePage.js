@@ -2,6 +2,7 @@ import { useSelector } from "react-redux";
 import Header from "../components/Header";
 import Button from "../components/Common/Button";
 import { getAuth, signOut } from "firebase/auth";
+import { toast } from "react-toastify";
 
 const ProfilePage = () => {
   const user = useSelector((state) => state.user.user);
@@ -10,10 +11,10 @@ const ProfilePage = () => {
     const auth = getAuth();
     signOut(auth)
       .then(() => {
-        // Sign-out successful.
+        toast.success("Signed out successfully");
       })
       .catch((error) => {
-        // An error happened.
+        toast.error(error.message);
       });
   };
   if (!user) {

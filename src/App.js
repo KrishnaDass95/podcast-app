@@ -10,7 +10,8 @@ import { onAuthStateChanged } from 'firebase/auth';
 import { onSnapshot } from 'firebase/firestore';
 import { db, auth } from './firebase';
 import { setUser } from './slices/userSlice';
-import { setDoc, doc } from "firebase/firestore";
+import { doc } from "firebase/firestore";
+import PrivateRoutes from './components/Common/PrivateRoutes';
 
 const App = () => {
 
@@ -62,7 +63,9 @@ const App = () => {
       <ToastContainer />
       <Routes>
         <Route path="/" element={<SignupPage />}></Route>
+        <Route element={<PrivateRoutes />}>
         <Route path="/profile" element={<ProfilePage />}></Route>
+        </Route>
       </Routes>
     </div>
   )

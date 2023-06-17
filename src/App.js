@@ -14,6 +14,7 @@ import { doc } from "firebase/firestore";
 import PrivateRoutes from './components/Common/PrivateRoutes';
 import CreateAPodcastPage from './pages/podcastPage';
 import PodcastsPage from './pages/displayPodcasts';
+import PodcastDetails from './pages/PodcastDetails';
 
 const App = () => {
 
@@ -69,7 +70,7 @@ const App = () => {
         <Route path="/profile" element={<ProfilePage />}></Route>
         <Route path="/create-a-podcast" element={<CreateAPodcastPage />}></Route>
         <Route path="/podcasts" element={<PodcastsPage />}></Route>
-
+        <Route path="/podcast/:id" element={<PodcastDetails />} />
         </Route>
       </Routes>
     </div>

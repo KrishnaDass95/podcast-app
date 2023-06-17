@@ -15,7 +15,7 @@ const PodcastDetails = () => {
 
   useEffect(() => {
     if (id) {
-        getData();
+      getData();
     }
   }, [id]);
 
@@ -27,12 +27,11 @@ const PodcastDetails = () => {
       if (docSnap.exists()) {
         console.log("podcast document data retrieved from db", docSnap.data());
         setPodcast({ id: id, ...docSnap.data() });
-      }
-      else{
+      } else {
         toast.info("The podcast you are looking for does not exist");
       }
     } catch (error) {
-        toast.error(error.message);
+      toast.error(error.message);
     }
   }
 
@@ -40,26 +39,24 @@ const PodcastDetails = () => {
     <div>
       <Header />
       <div className="input-wrapper">
-        {
-            podcast.id && (
-                <>
-                <div className="heading-button-podcast-detail">
-                    <h1 className="podcast-title-heading">{podcast.title}</h1>
-                    {podcast.createdBy == auth.currentUser.uid && <Button 
-                    text={"create an episode"}
-                    onClick={() => navigate(`/podcast/${id}/create-episode`)}
-                    />}
-                </div>
-                <div className="banner-wrapper">
-                        <img src={podcast.bannerImage} alt={podcast.description}/>
-                    </div>
+        {podcast.id && (
+          <>
+            <div className="heading-button-podcast-detail">
+              <h1 className="podcast-title-heading">{podcast.title}</h1>
+              {podcast.createdBy == auth.currentUser.uid && (
+                <Button
+                  text={"create an episode"}
+                  onClick={() => navigate(`/podcast/${id}/create-episode`)}
+                />
+              )}
+            </div>
+            <div className="banner-wrapper">
+              <img src={podcast.bannerImage} alt={podcast.description} />
+            </div>
 
-                    <p className="podcast-description">{podcast.description}</p>
-                </>
-            )
-        }
-
-
+            <p className="podcast-description">{podcast.description}</p>
+          </>
+        )}
       </div>
     </div>
   );

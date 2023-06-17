@@ -49,7 +49,7 @@ const PodcastsPage = () => {
       />
 
         {
-            podcasts.length > 0 ?
+            filteredPodcasts.length > 0 ?
              (
                 <div className="podcasts-flex">
                     {filteredPodcasts.map((item) => {
@@ -62,7 +62,7 @@ const PodcastsPage = () => {
                     })}
                 </div>
             ) : 
-            <><p>No podcasts availble in the platform</p></>
+            <><p>{filteredPodcasts.length === 0 ? 'Could not find podcast based on search' : 'No podcasts availble in the platform'}</p></>
         }
       </div>
     </div>

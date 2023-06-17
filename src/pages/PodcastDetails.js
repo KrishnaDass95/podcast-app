@@ -43,20 +43,18 @@ const PodcastDetails = () => {
         {
             podcast.id && (
                 <>
-                <div>
+                <div className="heading-button-podcast-detail">
                     <h1 className="podcast-title-heading">{podcast.title}</h1>
                     {podcast.createdBy == auth.currentUser.uid && <Button 
                     text={"create an episode"}
                     onClick={() => navigate(`/podcast/${id}/create-episode`)}
                     />}
-
-                    <div className="banner-wrapper">
+                </div>
+                <div className="banner-wrapper">
                         <img src={podcast.bannerImage} alt={podcast.description}/>
                     </div>
 
                     <p className="podcast-description">{podcast.description}</p>
-
-                </div>
                 </>
             )
         }

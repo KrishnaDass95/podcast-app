@@ -104,7 +104,11 @@ const CreatePodcastForm = () => {
         fileHandleFnc={bannerImageFileHandleFunc}
       />
 
-      <Button text={loading ? 'Loading...' : 'Create a podcast'} onClick={handleSubmit} disabled={loading} />
+      <Button
+        text={loading ? "Loading..." : "Create a podcast"}
+        onClick={handleSubmit}
+        disabled={loading}
+      />
     </div>
   );
 };

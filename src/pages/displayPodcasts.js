@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { collection, onSnapshot, query } from "firebase/firestore";
 import { db } from "../firebase";
 import { setPodcasts } from "../slices/podcastSlice";
+import PodcastCard from "../components/PodcastComponents/PodcastCard";
 
 const PodcastsPage = () => {
   const dispatch = useDispatch();
@@ -34,13 +35,22 @@ const PodcastsPage = () => {
       <Header />
       <h1>Discover Podcasts</h1>
       <div class="input-wrapper">
-        {podcasts.length > 0 ? (
-            <>
-            {podcasts.map((item) => {
-                return <p>{item.title}</p>
-            })}
-            </>
-        ) : <>Podcasts absent</>}
+        {
+            podcasts.length > 0 ?
+             (
+                <div className="podcasts-flex">
+                    {podcasts.map((item) => {
+                        return <PodcastCard 
+                        key={item.id}
+                        id={item.id}
+                        title={item.title}
+                        displayImage={item.displayImage}
+                        />
+                    })}
+                </div>
+            ) : 
+            <><p>No podcasts availble in the platform</p></>
+        }
       </div>
     </div>
   );

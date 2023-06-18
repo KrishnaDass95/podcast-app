@@ -55,6 +55,8 @@ const PodcastDetails = () => {
             </div>
 
             <p className="podcast-description">{podcast.description}</p>
+
+            <h1 className="podcast-title-heading">Episodes</h1>
           </>
         )}
       </div>

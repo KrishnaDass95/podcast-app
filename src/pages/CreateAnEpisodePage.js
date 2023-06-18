@@ -23,6 +23,7 @@ const CreateAnEpisodePage = () => {
     setAudioFile(file);
   };
 
+  // this function creates a new episode
   const handleSubmit = async () => {
     setLoading(true);
     if (title && desc && audioFile) {
@@ -41,6 +42,8 @@ const CreateAnEpisodePage = () => {
             description: desc,
             audioFile: audioUrl
         }
+
+        // console.log(episodeData);
 
         await addDoc(collection(db, "podcasts", id, "episodes"), episodeData);
         toast.success("Episode created successfully");

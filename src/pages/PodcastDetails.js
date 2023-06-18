@@ -1,7 +1,7 @@
 import { useNavigate, useParams } from "react-router-dom";
 import Header from "../components/Header";
 import { useEffect, useState } from "react";
-import { doc, getDoc } from "firebase/firestore";
+import { QuerySnapshot, collection, doc, getDoc, onSnapshot, query } from "firebase/firestore";
 import { auth, db } from "../firebase";
 import { toast } from "react-toastify";
 import Button from "../components/Common/Button";
@@ -9,6 +9,8 @@ import Button from "../components/Common/Button";
 const PodcastDetails = () => {
   const { id } = useParams();
   const [podcast, setPodcast] = useState({});
+  const [episodes, setEpisodes] = useState([]);
+
   const navigate = useNavigate();
 
   console.log("podcast id from use Params", id);
@@ -18,6 +20,23 @@ const PodcastDetails = () => {
       getData();
     }
   }, [id]);
+
+  useEffect(() => {
+    const unsubsribe = onSnapshot(
+      query(collection(db, "podcasts", id, "episodes")),
+      (querySnapshot) => {
+        const episodeData = [];
+        querySnapshot.forEach((doc) => {
+          episodeData.push({id: doc.id, ...doc.data()})
+        });
+        setEpisodes(episodeData);
+      }
+    )
+
+    return () => {
+      unsubsribe();
+    }
+  }, [id])
 
   async function getData() {
     try {

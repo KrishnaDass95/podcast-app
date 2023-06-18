@@ -1,15 +1,37 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./style.css";
 import {FaPlay, FaPause, FaVolumeUp, FaVolumeMute} from "react-icons/fa"
 
 const AudioPlayer = ({ audioSrc, image }) => {
   const [duration, setDuration] = useState("");
   const [volume, setVolume] = useState(1);
-  const [isMute, setIsMute] = useState(true);
+  const [isMute, setIsMute] = useState(false);
   const [isPlaying, setIsPlaying] = useState(true);
 
   // useRef hook persists state through re-renders
   const audioRef = useRef();
+
+  useEffect(() => {
+    if(isPlaying){
+        audioRef.current.play();
+    }
+    else{
+        audioRef.current.pause();
+    }
+
+  }, [isPlaying])
+
+  useEffect(() => {
+    if(!isMute){
+        audioRef.current.volume = 1;
+        setVolume(1);
+    }
+    else{
+        audioRef.current.volume = 0;
+        setVolume(0);
+    }
+
+  }, [isMute])
 
 
   const handleDuration = (e) => {
@@ -32,7 +54,7 @@ const AudioPlayer = ({ audioSrc, image }) => {
         <p>0:00</p>
         <input onChange={handleDuration} type="range" className="duration-range" />
         <p>-21:00</p>
-        <p onClick={() => setIsMute(!isMute)}>{isMute ? <FaVolumeUp /> : <FaVolumeMute />}</p>
+        <p onClick={() => setIsMute(!isMute)}>{isMute ? <FaVolumeMute /> : <FaVolumeUp />}</p>
 
         <input onChange={handleVolume} type="range" className="volume-range" />
       </div>

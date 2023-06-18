@@ -64,6 +64,7 @@ const AudioPlayer = ({ audioSrc, image }) => {
 
 
   const handleDuration = (e) => {
+    console.log("audio-change",e.target.value);
     setCurrentTime(e.target.value);
   };
 

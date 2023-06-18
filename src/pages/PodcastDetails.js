@@ -87,10 +87,11 @@ const PodcastDetails = () => {
 
             <h1 className="podcast-title-heading">Episodes</h1>
             {episodes.length > 0 ? (
-              <div>
+              <div className="episode-content">
                 {episodes.map((epi, index) => {
                   return (
                     <EpisodeDetails
+                      key={index}
                       index={index + 1}
                       title={epi.title}
                       description={epi.description}
@@ -101,6 +102,7 @@ const PodcastDetails = () => {
                 })}
                 {playingFile && (
                   <AudioPlayer
+                    key={playingFile}
                     audioSrc={playingFile}
                     image={podcast.displayImage}
                   />

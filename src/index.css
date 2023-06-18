@@ -84,3 +84,7 @@ a{
 .episode-description, .podcast-description{
   color: var(--purple-grey);
 }
+
+.episode-content{
+  margin-bottom: 100px;
+}

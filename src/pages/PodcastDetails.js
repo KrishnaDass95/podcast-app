@@ -1,10 +1,18 @@
 import { useNavigate, useParams } from "react-router-dom";
 import Header from "../components/Header";
 import { useEffect, useState } from "react";
-import { QuerySnapshot, collection, doc, getDoc, onSnapshot, query } from "firebase/firestore";
+import {
+  QuerySnapshot,
+  collection,
+  doc,
+  getDoc,
+  onSnapshot,
+  query,
+} from "firebase/firestore";
 import { auth, db } from "../firebase";
 import { toast } from "react-toastify";
 import Button from "../components/Common/Button";
+import EpisodeDetails from "../components/PodcastComponents/EpisodeDetails";
 
 const PodcastDetails = () => {
   const { id } = useParams();
@@ -27,16 +35,16 @@ const PodcastDetails = () => {
       (querySnapshot) => {
         const episodeData = [];
         querySnapshot.forEach((doc) => {
-          episodeData.push({id: doc.id, ...doc.data()})
+          episodeData.push({ id: doc.id, ...doc.data() });
         });
         setEpisodes(episodeData);
       }
-    )
+    );
 
     return () => {
       unsubsribe();
-    }
-  }, [id])
+    };
+  }, [id]);
 
   async function getData() {
     try {
@@ -76,6 +84,23 @@ const PodcastDetails = () => {
             <p className="podcast-description">{podcast.description}</p>
 
             <h1 className="podcast-title-heading">Episodes</h1>
+            {episodes.length > 0 ? (
+              <div>
+                {episodes.map((epi, index) => {
+                  return (
+                    <EpisodeDetails
+                      index={index + 1}
+                      title={epi.title}
+                      description={epi.description}
+                      audioFile={epi.audioFile}
+                      onClick={(file) => console.log("playing file", file)}
+                    />
+                  );
+                })}
+              </div>
+            ) : (
+              <>No episodes available for this podcast</>
+            )}
           </>
         )}
       </div>

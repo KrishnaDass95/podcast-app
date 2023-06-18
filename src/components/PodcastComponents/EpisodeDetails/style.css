@@ -1,0 +1,8 @@
+.episode-container, .episode-titles{
+    width: 100%;
+    text-align: left;
+}
+
+.episode-button{
+    width: 200px !important;
+}

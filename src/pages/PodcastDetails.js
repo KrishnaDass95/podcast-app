@@ -13,11 +13,13 @@ import { auth, db } from "../firebase";
 import { toast } from "react-toastify";
 import Button from "../components/Common/Button";
 import EpisodeDetails from "../components/PodcastComponents/EpisodeDetails";
+import AudioPlayer from "../components/PodcastComponents/AudioPlayer";
 
 const PodcastDetails = () => {
   const { id } = useParams();
   const [podcast, setPodcast] = useState({});
   const [episodes, setEpisodes] = useState([]);
+  const [playingFile, setPlayingFile] = useState();
 
   const navigate = useNavigate();
 
@@ -93,10 +95,16 @@ const PodcastDetails = () => {
                       title={epi.title}
                       description={epi.description}
                       audioFile={epi.audioFile}
-                      onClick={(file) => console.log("playing file", file)}
+                      onClick={(file) => setPlayingFile(file)}
                     />
                   );
                 })}
+                {playingFile && (
+                  <AudioPlayer
+                    audioSrc={playingFile}
+                    image={podcast.displayImage}
+                  />
+                )}
               </div>
             ) : (
               <>No episodes available for this podcast</>

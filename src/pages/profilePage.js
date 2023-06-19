@@ -3,6 +3,7 @@ import Header from "../components/Header";
 import Button from "../components/Common/Button";
 import { getAuth, signOut } from "firebase/auth";
 import { toast } from "react-toastify";
+import Loader from "../components/Common/Loader";
 
 const ProfilePage = () => {
   const user = useSelector((state) => state.user.user);
@@ -18,7 +19,7 @@ const ProfilePage = () => {
       });
   };
   if (!user) {
-    return <div>Loading...</div>;
+    return <Loader></Loader>;
   }
   return (
     <div>
